@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.recife.edu.ife.model.entities;
+package br.recife.edu.ifpe.model.entities;
 
 /**
  *

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.recife.edu.ife.model.repositories;
+package br.recife.edu.ifpe.model.repositories;
 
-import br.recife.edu.ife.model.entities.Estudante;
+import br.recife.edu.ifpe.model.entities.Estudante;
 import java.util.ArrayList;
 import java.util.List;
 
