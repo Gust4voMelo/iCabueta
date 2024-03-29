@@ -44,7 +44,7 @@ public class CadeiraServlet extends HttpServlet {
                         out.println("<!DOCTYPE html>");
                         out.println("<html>");
                         out.println("<head>");
-                        out.println("<title>Servlet Cadeira</title>");
+                        out.println("<title>Servlet CadeiraServlet</title>");
                         out.println("</head>");
                         out.println("<body>");
                         out.println("<h1>Editar Cadeira</h1>");
@@ -77,7 +77,7 @@ public class CadeiraServlet extends HttpServlet {
                         out.println("<!DOCTYPE html>");
                         out.println("<html>");
                         out.println("<head>");
-                        out.println("<title>Servlet Cadeira</title>");
+                        out.println("<title>Servlet CadeiraServlet</title>");
                         out.println("</head>");
                         out.println("<body>");
                         out.println("<a href='CadeiraServlet'>Cadeiras Cadastradas</a>");
@@ -98,7 +98,7 @@ public class CadeiraServlet extends HttpServlet {
                 out.println("<!DOCTYPE html>");
                 out.println("<html>");
                 out.println("<head>");
-                out.println("<title>Servlet Cadeira</title>");
+                out.println("<title>Servlet CadeiraServlet</title>");
                 out.println("</head>");
                 out.println("<body>");
                 out.println("<h1>Cadeira cadastrada no sistema</h1>");
@@ -123,7 +123,7 @@ public class CadeiraServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Cadeira</title>");
+            out.println("<title>Servlet CadeiraServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Cadeiras cadastradas no sistema</h1>");
@@ -187,6 +187,7 @@ public class CadeiraServlet extends HttpServlet {
             } else {
                 out.println("<h1>Cadeira " + nome + " foi alterada com sucesso!</h1>");
             }
+            out.println("<a href='CadeiraServlet'>Ver cadeiras cadastradas</a><br/>");
             out.println("<a href='index.html''>Home</a>");
             out.println("</body>");
             out.println("</html>");
