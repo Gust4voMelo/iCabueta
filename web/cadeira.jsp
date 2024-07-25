@@ -49,16 +49,20 @@
             </tr>
             <%
                 for (Cadeira cad : cadeiras) {
-                out.println("<tr>");
-                out.println("<td>" + cad.getCodigo() + "</td>");
-                out.println("<td>" + cad.getNome() + "</td>");
-                out.println("<td>" + cad.getAno() + "</td>");
-                out.println("<td>" + cad.getSemestre() + "</td>");
-                out.println("<td>" + cad.getDescricao() + "</td>");
-                out.println("<td><a href='CadeiraServlet?codigo=" + cad.getCodigo() + "'>detalhar</a>"
-                        + "     <a href='CadeiraServlet?codigo=" + cad.getCodigo() + "&op=edit'>editar</a>"
-                        + " <a href='CadeiraServlet?codigo=" + cad.getCodigo() + "&op=delete'>deletar</a></td>");
-                out.println("</tr>");
+            %>
+                <tr>
+                    <td><%=cad.getCodigo()%></td>
+                    <td><%=cad.getNome()%></td>
+                    <td><%=cad.getAno()%></td>
+                    <td><%=cad.getSemestre()%></td>
+                    <td><%=cad.getDescricao()%></td>
+                    <td>
+                        <a href='CadeiraServletNovo?codigo=<%=cad.getCodigo()%>'>detalhar</a>
+                        <a href='CadeiraServletNovo?codigo=<%=cad.getCodigo()%>&op=edit'>editar</a>
+                        <a href='CadeiraServletNovo?codigo=<%=cad.getCodigo()%>&op=delete'>deletar</a>
+                    </td>
+                </tr>
+            <%    
                 }
             %>
         </table>

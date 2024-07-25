@@ -47,14 +47,17 @@
             </tr>
             <%
                 for (Professor prof: professores) {
-                out.println("<tr>");
-                out.println("<td>" + prof.getCodigo() + "</td>");
-                out.println("<td>" + prof.getNome() + "</td>");
-                out.println("<td>" + prof.getEmail() + "</td>");
-                out.println("<td><a href='ProfessorServlet?codigo=" + prof.getCodigo() + "'>detalhar</a>"
-                        + "     <a href='ProfessorServlet?codigo=" + prof.getCodigo() + "&op=edit'>editar</a>"
-                        + " <a href='ProfessorServlet?codigo=" + prof.getCodigo() + "&op=delete'>deletar</a></td>");
-                out.println("</tr>");
+            %>
+                <tr>
+                    <td><%=prof.getCodigo()%></td>
+                    <td><%=prof.getNome()%></td>
+                    <td><%=prof.getEmail()%></td>
+                    <td>
+                        <a href='ProfessorServletNovo?codigo=<%=prof.getCodigo()%>'>detalhar</a>
+                        <a href='ProfessorServletNovo?codigo=<%=prof.getCodigo()%>&op=edit'>editar</a>
+                        <a href='ProfessorServletNovo?codigo=<%=prof.getCodigo()%>&op=delete'>deletar</a></td>
+                </tr>
+            <%
                 }
             %>
         </table>

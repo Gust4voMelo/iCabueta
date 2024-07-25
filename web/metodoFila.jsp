@@ -47,14 +47,17 @@
             </tr>
             <%
                 for (MetodoFila mf: metodosFila) {
-                out.println("<tr>");
-                out.println("<td>" + mf.getCodigo() + "</td>");
-                out.println("<td>" + mf.getDescricaoCurta() + "</td>");
-                out.println("<td>" + mf.getDescricaoLonga() + "</td>");
-                out.println("<td><a href='MetodoFilaServlet?codigo=" + mf.getCodigo() + "'>detalhar</a>"
-                        + "     <a href='MetodoFilaServlet?codigo=" + mf.getCodigo() + "&op=edit'>editar</a>"
-                        + " <a href='MetodoFilaServlet?codigo=" + mf.getCodigo() + "&op=delete'>deletar</a></td>");
-                out.println("</tr>");
+            %>
+                <tr>
+                    <td><%=mf.getCodigo()%></td>
+                    <td><%=mf.getDescricaoCurta()%></td>
+                    <td><%=mf.getDescricaoLonga()%></td>
+                    <td>
+                        <a href='MetodoFilaServletNovo?codigo=<%=mf.getCodigo()%>'>detalhar</a>
+                        <a href='MetodoFilaServletNovo?codigo=<%=mf.getCodigo()%>&op=edit'>editar</a>
+                        <a href='MetodoFilaServletNovo?codigo=<%=mf.getCodigo()%>&op=delete'>deletar</a></td>
+                </tr>
+            <%
                 }
             %>
         </table>

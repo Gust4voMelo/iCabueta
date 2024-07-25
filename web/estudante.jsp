@@ -48,15 +48,19 @@
             </tr>
             <%
                 for (Estudante est: estudantes) {
-                out.println("<tr>");
-                out.println("<td>" + est.getCodigo() + "</td>");
-                out.println("<td>" + est.getNome() + "</td>");
-                out.println("<td>" + est.getEmail() + "</td>");
-                out.println("<td>" + est.getAnoEntrada()+ "</td>");
-                out.println("<td><a href='EstudanteServlet?codigo=" + est.getCodigo() + "'>detalhar</a>"
-                        + "     <a href='EstudanteServlet?codigo=" + est.getCodigo() + "&op=edit'>editar</a>"
-                        + " <a href='EstudanteServlet?codigo=" + est.getCodigo() + "&op=delete'>deletar</a></td>");
-                out.println("</tr>");
+            %>
+                <tr>
+                    <td><%=est.getCodigo()%></td>
+                    <td><%=est.getNome()%></td>
+                    <td><%=est.getEmail()%></td>
+                    <td><%=est.getAnoEntrada()%></td>
+                    <td>
+                        <a href='EstudanteServletNovo?codigo=<%=est.getCodigo()%>'>detalhar</a>
+                        <a href='EstudanteServletNovo?codigo=<%=est.getCodigo()%>&op=edit'>editar</a>
+                        <a href='EstudanteServletNovo?codigo=<%=est.getCodigo()%>&op=delete'>deletar</a>
+                    </td>
+                </tr>
+            <%
                 }
             %>
         </table>
