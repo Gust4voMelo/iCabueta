@@ -62,7 +62,7 @@
                     <td><%=prof.getEmail()%></td>
                     <td>
                         <a href='ProfessorServletNovo?codigo=<%=prof.getCodigo()%>&redirect=visualiza'>visualizar</a>
-                        <a href='ProfessorServletNovo?codigo=<%=prof.getCodigo()%>&op=edit'>editar</a>
+                        <a href='ProfessorServletNovo?codigo=<%=prof.getCodigo()%>&redirect=atualiza'>atualizar</a>
                         <a href='ProfessorServletNovo?codigo=<%=prof.getCodigo()%>&op=delete'>deletar</a></td>
                 </tr>
             <%

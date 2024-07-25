@@ -62,7 +62,7 @@
                     <td><%=mf.getDescricaoLonga()%></td>
                     <td>
                         <a href='MetodoFilaServletNovo?codigo=<%=mf.getCodigo()%>&redirect=visualiza'>visualizar</a>
-                        <a href='MetodoFilaServletNovo?codigo=<%=mf.getCodigo()%>&op=edit'>editar</a>
+                        <a href='MetodoFilaServletNovo?codigo=<%=mf.getCodigo()%>&redirect=atualiza'>atualizar</a>
                         <a href='MetodoFilaServletNovo?codigo=<%=mf.getCodigo()%>&op=delete'>deletar</a></td>
                 </tr>
             <%

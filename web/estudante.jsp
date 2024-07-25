@@ -63,7 +63,7 @@
                     <td><%=est.getAnoEntrada()%></td>
                     <td>
                         <a href='EstudanteServletNovo?codigo=<%=est.getCodigo()%>&redirect=visualiza'>visualizar</a>
-                        <a href='EstudanteServletNovo?codigo=<%=est.getCodigo()%>&op=edit'>editar</a>
+                        <a href='EstudanteServletNovo?codigo=<%=est.getCodigo()%>&redirect=atualiza'>atualizar</a>
                         <a href='EstudanteServletNovo?codigo=<%=est.getCodigo()%>&op=delete'>deletar</a>
                     </td>
                 </tr>

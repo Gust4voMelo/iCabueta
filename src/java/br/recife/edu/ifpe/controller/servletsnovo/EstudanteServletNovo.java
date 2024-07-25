@@ -37,7 +37,6 @@ public class EstudanteServletNovo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int codigo = Integer.parseInt(request.getParameter("codigo"));
-        String redirect = request.getParameter("redirect");
         
         Estudante est = EstudanteRepository.read(codigo);
         
@@ -63,24 +62,26 @@ public class EstudanteServletNovo extends HttpServlet {
         String email = request.getParameter("email");
         int anoEntrada = Integer.parseInt(request.getParameter("anoEntrada"));
         String senha = request.getParameter("senha");
-        String edit = request.getParameter("edit");
-
+        
+        String atualizar = request.getParameter("atualizar");
         Estudante est = new Estudante();
+        
         est.setCodigo(codigo); 
         est.setNome(nome);
         est.setEmail(email);
         est.setSenha(senha);
         est.setAnoEntrada(anoEntrada);
+        
+        HttpSession session = request.getSession();
 
-        if (edit != null) {
+        if (atualizar != null) {
             EstudanteRepository.update(est);
+            session.setAttribute("msgEst", "Estudante "+est.getNome()+" foi atualizado com sucesso!");      
         } else {
             EstudanteRepository.create(est);
-        }
-        HttpSession session = request.getSession();
-        
-        session.setAttribute("msgEst", "Estudante "+est.getNome()+" foi cadastrado com sucesso!");
-        
+            session.setAttribute("msgEst", "Estudante "+est.getNome()+" foi cadastrado com sucesso!");
+        }      
+                
         response.sendRedirect("estudante.jsp");
     }
 

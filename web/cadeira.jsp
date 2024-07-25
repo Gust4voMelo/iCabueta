@@ -65,7 +65,7 @@
                     <td><%=cad.getDescricao()%></td>
                     <td>
                         <a href='CadeiraServletNovo?codigo=<%=cad.getCodigo()%>&redirect=visualiza'>visualizar</a>
-                        <a href='CadeiraServletNovo?codigo=<%=cad.getCodigo()%>&op=edit'>editar</a>
+                        <a href='CadeiraServletNovo?codigo=<%=cad.getCodigo()%>&redirect=atualiza'>atualizar</a>
                         <a href='CadeiraServletNovo?codigo=<%=cad.getCodigo()%>&op=delete'>deletar</a>
                     </td>
                 </tr>

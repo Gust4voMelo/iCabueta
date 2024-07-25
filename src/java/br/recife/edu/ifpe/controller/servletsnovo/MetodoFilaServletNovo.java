@@ -38,7 +38,6 @@ public class MetodoFilaServletNovo extends HttpServlet {
             throws ServletException, IOException {
         
         int codigo = Integer.parseInt(request.getParameter("codigo"));
-        String redirect = request.getParameter("redirect");
         
         MetodoFila mf = MetodoFilaRepository.read(codigo);
         
@@ -62,22 +61,24 @@ public class MetodoFilaServletNovo extends HttpServlet {
         int codigo = Integer.parseInt(request.getParameter("codigo")); //recupera as informações do form
         String descricaoCurta = request.getParameter("descricaoCurta");
         String descricaoLonga = request.getParameter("descricaoLonga");
-        String edit = request.getParameter("edit");
-
+        
+        String atualizar = request.getParameter("atualizar");
         MetodoFila mf = new MetodoFila();
+        
         mf.setCodigo(codigo); 
         mf.setDescricaoCurta(descricaoCurta);
         mf.setDescricaoLonga(descricaoLonga);
+        
+        HttpSession session = request.getSession();
 
-        if (edit != null) {
+        if (atualizar != null) {
             MetodoFilaRepository.update(mf);
+            session.setAttribute("msgMetFil", "Metodo de fila "+mf.getDescricaoCurta()+" foi atualizado com sucesso!");
         } else {
             MetodoFilaRepository.create(mf);
-        }
-        HttpSession session = request.getSession();
-        
-        session.setAttribute("msgMetFil", "Metodo de fila "+mf.getDescricaoCurta()+" foi cadastrado com sucesso!");
-        
+            session.setAttribute("msgMetFil", "Metodo de fila "+mf.getDescricaoCurta()+" foi cadastrado com sucesso!");
+        }      
+                        
         response.sendRedirect("metodoFila.jsp");
     }
 

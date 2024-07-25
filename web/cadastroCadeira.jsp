@@ -14,12 +14,15 @@
     <body>
         <h1>Cadastro cadeira</h1>
         <form method="post" action="CadeiraServletNovo">
-            Código: <input type="text" name="codigo"/><br/>
-            Nome: <input type="text" name="nome"/></br>
-            Ano: <input type="number" name="ano"/></br>
-            Semestre: <input type="number" name="semestre"/><br/>
-            Descrição: <textarea name="descricao"></textarea></br>
-            <input type="submit" value="cadastrar"/>
+            
+            Código: <input type="text" name="codigo" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?cadeira.codigo:''}"/><br/>
+            Nome: <input type="text" name="nome" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?cadeira.nome:''}"/></br>
+            Ano: <input type="number" name="ano" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?cadeira.ano:''}"/></br>
+            Semestre: <input type="number" name="semestre" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?cadeira.semestre:''}"/><br/>
+            Descrição: <textarea name="descricao">${(param.redirect != null && param["redirect"] eq 'atualiza')?cadeira.codigo:''}</textarea></br>
+            <input type="hidden" name="${(param.redirect != null && param.redirect eq 'atualiza')?'atualizar':'cadastrar'}" value="1"/>
+            
+            <input type="submit" value="${(param.redirect != null && param.redirect eq 'atualiza')?'atualizar':'cadastrar'}"/>
         </form>
     </body>
 </html>

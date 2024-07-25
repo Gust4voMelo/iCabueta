@@ -36,7 +36,6 @@ public class CadeiraServletNovo extends HttpServlet {
             throws ServletException, IOException {
 
         int codigo = Integer.parseInt(request.getParameter("codigo"));
-        String redirect = request.getParameter("redirect");
         
         Cadeira cad = CadeiraRepository.read(codigo);
         
@@ -57,29 +56,31 @@ public class CadeiraServletNovo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-         int codigo = Integer.parseInt(request.getParameter("codigo")); //recupera as informações do form
+        int codigo = Integer.parseInt(request.getParameter("codigo")); //recupera as informações do form
         String nome = request.getParameter("nome");
         int ano = Integer.parseInt(request.getParameter("ano"));
         int semestre = Integer.parseInt(request.getParameter("semestre"));
         String descricao = request.getParameter("descricao");
-        String edit = request.getParameter("edit");
-
+        
+        String atualizar = request.getParameter("atualizar");
+ 
         Cadeira cad = new Cadeira();
+        
         cad.setCodigo(codigo); 
         cad.setNome(nome);
         cad.setAno(ano);
         cad.setSemestre(semestre);
         cad.setDescricao(descricao);
-
-        if (edit != null) {
-            CadeiraRepository.update(cad);
-        } else {
-            CadeiraRepository.create(cad);
-        }
         
         HttpSession session = request.getSession();
-        
-        session.setAttribute("msgCad", "Cadeira "+cad.getNome()+" foi cadastrada com sucesso!");
+
+        if (atualizar != null) {
+            CadeiraRepository.update(cad);
+            session.setAttribute("msgCad", "Cadeira "+cad.getNome()+" foi atualizada com sucesso!");
+        } else {
+            CadeiraRepository.create(cad);
+            session.setAttribute("msgCad", "Cadeira "+cad.getNome()+" foi cadastrada com sucesso!");
+        }
         
         response.sendRedirect("cadeira.jsp");
     }

@@ -35,7 +35,6 @@ public class ProfessorServletNovo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int codigo = Integer.parseInt(request.getParameter("codigo"));
-        String redirect = request.getParameter("redirect");
         
         Professor prof = ProfessorRepository.read(codigo);
         
@@ -60,8 +59,8 @@ public class ProfessorServletNovo extends HttpServlet {
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        String edit = request.getParameter("edit");
         
+        String atualizar = request.getParameter("atualizar");        
         Professor prof = new Professor();
         
         prof.setCodigo(codigo); 
@@ -69,16 +68,16 @@ public class ProfessorServletNovo extends HttpServlet {
         prof.setEmail(email);
         prof.setSenha(senha);
         
-        if (edit != null) {
-            ProfessorRepository.update(prof);
-        } else {
-            ProfessorRepository.create(prof);
-        }
-        
         HttpSession session = request.getSession();
         
-        session.setAttribute("msgProf", "Professor "+prof.getNome()+" foi cadastrado com sucesso!");
-        
+        if (atualizar != null) {
+            ProfessorRepository.update(prof);
+            session.setAttribute("msgProf", "Professor "+prof.getNome()+" foi atualizado com sucesso!");
+        } else {
+            ProfessorRepository.create(prof);
+            session.setAttribute("msgProf", "Professor "+prof.getNome()+" foi cadastrado com sucesso!");
+        }
+  
         response.sendRedirect("professor.jsp");
     }
 
