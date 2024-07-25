@@ -35,6 +35,14 @@ public class CadeiraServletNovo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        int codigo = Integer.parseInt(request.getParameter("codigo"));
+        String redirect = request.getParameter("redirect");
+        
+        Cadeira cad = CadeiraRepository.read(codigo);
+        
+        request.setAttribute("cadeira", cad);
+        
+        getServletContext().getRequestDispatcher("/cadeira.jsp").forward(request, response);
     }
 
     /**

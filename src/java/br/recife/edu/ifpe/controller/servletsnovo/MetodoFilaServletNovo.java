@@ -36,7 +36,15 @@ public class MetodoFilaServletNovo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        int codigo = Integer.parseInt(request.getParameter("codigo"));
+        String redirect = request.getParameter("redirect");
+        
+        MetodoFila mf = MetodoFilaRepository.read(codigo);
+        
+        request.setAttribute("metodoFila", mf);
+        
+        getServletContext().getRequestDispatcher("/metodoFila.jsp").forward(request, response);
     }
 
     /**

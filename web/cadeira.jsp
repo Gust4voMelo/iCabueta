@@ -26,12 +26,19 @@
         %>
         
         <button onclick="modalopen()">Nova cadeira</button>
-        <div id="modal" style="position: absolute; top: 300px; left: 600px; border: 1px black solid">
+        <div id="modal" style="position: absolute; top: 300px; left: 500px; border: 1px black solid">
             
             <%@include file="cadastroCadeira.jsp" %>
             
             <br/>
             <button onclick="modalclose()">close</button>
+        </div>
+        <div id="modal2" style="position: absolute; top: 300px; left: 500px; border: 1px black solid">
+            
+            <%@include file="visualizaCadeira.jsp" %>
+            
+            <br/>
+            <button onclick="modal2close()">close</button>
         </div>
             
         <% 
@@ -57,7 +64,7 @@
                     <td><%=cad.getSemestre()%></td>
                     <td><%=cad.getDescricao()%></td>
                     <td>
-                        <a href='CadeiraServletNovo?codigo=<%=cad.getCodigo()%>'>detalhar</a>
+                        <a href='CadeiraServletNovo?codigo=<%=cad.getCodigo()%>&redirect=visualiza'>visualizar</a>
                         <a href='CadeiraServletNovo?codigo=<%=cad.getCodigo()%>&op=edit'>editar</a>
                         <a href='CadeiraServletNovo?codigo=<%=cad.getCodigo()%>&op=delete'>deletar</a>
                     </td>
@@ -70,11 +77,29 @@
         <script>
             
             var modal = document.getElementById("modal");
+                      
+            var modal2 = document.getElementById("modal2");
             
-            document.body.removeChild(modal);
+            <%
+                String redirect = request.getParameter("redirect");
+                
+                if(redirect == null){
+            %>
+                document.body.removeChild(modal);
+                document.body.removeChild(modal2);
+                
+            <% }else if(redirect.equals("visualiza")){ %>
+                document.body.removeChild(modal);
+            <% }else{ %>
+                document.body.removeChild(modal2);
+            <% } %>
             
             function modalclose(){
                 document.body.removeChild(modal);
+            }
+            
+            function modal2close(){
+                document.body.removeChild(modal2);
             }
             
             function modalopen(){
