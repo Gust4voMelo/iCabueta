@@ -13,7 +13,6 @@
     </head>
     <body>
         <h1>Cadastro cadeira</h1>
-        <a href="index.html">Home</a></br>
         <form method="post" action="CadeiraServletNovo">
             Código: <input type="text" name="codigo"/><br/>
             Nome: <input type="text" name="nome"/></br>

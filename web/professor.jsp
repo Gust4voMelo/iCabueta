@@ -4,6 +4,9 @@
     Author     : gusta
 --%>
 
+<%@page import="br.recife.edu.ifpe.model.entities.Professor"%>
+<%@page import="br.recife.edu.ifpe.model.repositories.ProfessorRepository"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,8 +21,57 @@
             String mensagem = (String)session.getAttribute("msgProf");
             if(mensagem != null){
                 out.println("<h2>"+mensagem+"</h2>");
+                session.removeAttribute("msgProf");
             }
         %>
         
+        <button onclick="modalopen()">Novo professor</button>
+        <div id="modal" style="position: absolute; top: 300px; left: 600px; border: 1px black solid">
+            
+            <%@include file="cadastroProfessor.jsp" %>
+            
+            <br/>
+            <button onclick="modalclose()">close</button>
+        </div>
+            
+        <%
+            List<Professor> professores = ProfessorRepository.readAll();
+        %>
+        
+        <table border="1">
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>operações</th>
+            </tr>
+            <%
+                for (Professor prof: professores) {
+                out.println("<tr>");
+                out.println("<td>" + prof.getCodigo() + "</td>");
+                out.println("<td>" + prof.getNome() + "</td>");
+                out.println("<td>" + prof.getEmail() + "</td>");
+                out.println("<td><a href='ProfessorServlet?codigo=" + prof.getCodigo() + "'>detalhar</a>"
+                        + "     <a href='ProfessorServlet?codigo=" + prof.getCodigo() + "&op=edit'>editar</a>"
+                        + " <a href='ProfessorServlet?codigo=" + prof.getCodigo() + "&op=delete'>deletar</a></td>");
+                out.println("</tr>");
+                }
+            %>
+        </table>
+        
+        <script>
+            
+            var modal = document.getElementById("modal");
+            
+            document.body.removeChild(modal);
+            
+            function modalclose(){
+                document.body.removeChild(modal);
+            }
+            
+            function modalopen(){
+                document.body.appendChild(modal);
+            }
+        </script>
     </body>
 </html>

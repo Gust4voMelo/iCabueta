@@ -4,6 +4,9 @@
     Author     : gusta
 --%>
 
+<%@page import="br.recife.edu.ifpe.model.entities.Cadeira"%>
+<%@page import="br.recife.edu.ifpe.model.repositories.CadeiraRepository"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,7 +21,61 @@
             String mensagem = (String)session.getAttribute("msgCad");
             if(mensagem != null){
                 out.println("<h2>"+mensagem+"</h2>");
+                session.removeAttribute("msgCad");
             }
         %>
+        
+        <button onclick="modalopen()">Nova cadeira</button>
+        <div id="modal" style="position: absolute; top: 300px; left: 600px; border: 1px black solid">
+            
+            <%@include file="cadastroCadeira.jsp" %>
+            
+            <br/>
+            <button onclick="modalclose()">close</button>
+        </div>
+            
+        <% 
+            List<Cadeira> cadeiras = CadeiraRepository.readAll();
+        %>
+        
+        <table border="1">
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Ano</th>
+                <th>Semestre</th>
+                <th>Descrição</th>
+                <th>operações</th>
+            </tr>
+            <%
+                for (Cadeira cad : cadeiras) {
+                out.println("<tr>");
+                out.println("<td>" + cad.getCodigo() + "</td>");
+                out.println("<td>" + cad.getNome() + "</td>");
+                out.println("<td>" + cad.getAno() + "</td>");
+                out.println("<td>" + cad.getSemestre() + "</td>");
+                out.println("<td>" + cad.getDescricao() + "</td>");
+                out.println("<td><a href='CadeiraServlet?codigo=" + cad.getCodigo() + "'>detalhar</a>"
+                        + "     <a href='CadeiraServlet?codigo=" + cad.getCodigo() + "&op=edit'>editar</a>"
+                        + " <a href='CadeiraServlet?codigo=" + cad.getCodigo() + "&op=delete'>deletar</a></td>");
+                out.println("</tr>");
+                }
+            %>
+        </table>
+        
+        <script>
+            
+            var modal = document.getElementById("modal");
+            
+            document.body.removeChild(modal);
+            
+            function modalclose(){
+                document.body.removeChild(modal);
+            }
+            
+            function modalopen(){
+                document.body.appendChild(modal);
+            }
+        </script>
     </body>
 </html>

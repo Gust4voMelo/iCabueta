@@ -13,7 +13,6 @@
     </head>
     <body>
         <h1>Cadastro de metodo de fila</h1>
-        <a href="index.html">Home</a></br>
         <form method="post" action="MetodoFilaServletNovo">
             Código: <input type="text" name="codigo"/><br/>
             Descrição curta: <input type="text" name="descricaoCurta"/></br>
