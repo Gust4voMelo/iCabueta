@@ -38,12 +38,20 @@ public class MetodoFilaServletNovo extends HttpServlet {
             throws ServletException, IOException {
         
         int codigo = Integer.parseInt(request.getParameter("codigo"));
+        String op = request.getParameter("op");
         
-        MetodoFila mf = MetodoFilaRepository.read(codigo);
-        
-        request.setAttribute("metodoFila", mf);
-        
-        getServletContext().getRequestDispatcher("/metodoFila.jsp").forward(request, response);
+        if ("delete".equals(op)) {
+            MetodoFila mf = MetodoFilaRepository.read(codigo);
+            if (mf != null) {
+                MetodoFilaRepository.delete(codigo);
+                request.getSession().setAttribute("msgMetFil", "Metodo de Fila " + mf.getDescricaoCurta()+ " deletado com sucesso!");
+            }
+            response.sendRedirect("metodoFila.jsp");
+        } else {
+            MetodoFila mf = MetodoFilaRepository.read(codigo);
+            request.setAttribute("metodoFila", mf);
+            getServletContext().getRequestDispatcher("/metodoFila.jsp").forward(request, response);
+        }
     }
 
     /**

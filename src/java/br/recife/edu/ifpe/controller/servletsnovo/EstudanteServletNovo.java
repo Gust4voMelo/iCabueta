@@ -36,13 +36,21 @@ public class EstudanteServletNovo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int codigo = Integer.parseInt(request.getParameter("codigo"));
+        int codigo = Integer.parseInt(request.getParameter("codigo"));     
+        String op = request.getParameter("op");
         
-        Estudante est = EstudanteRepository.read(codigo);
-        
-        request.setAttribute("estudante", est);
-        
-        getServletContext().getRequestDispatcher("/estudante.jsp").forward(request, response);
+        if ("delete".equals(op)) {
+            Estudante est = EstudanteRepository.read(codigo);
+            if (est != null) {
+                EstudanteRepository.delete(codigo);
+                request.getSession().setAttribute("msgEst", "Estudante " + est.getNome() + " deletado com sucesso!");
+            }
+            response.sendRedirect("estudante.jsp");
+        } else {
+            Estudante est = EstudanteRepository.read(codigo);
+            request.setAttribute("estudante", est);
+            getServletContext().getRequestDispatcher("/estudante.jsp").forward(request, response);
+        }
     }
 
     /**

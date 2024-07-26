@@ -35,12 +35,20 @@ public class ProfessorServletNovo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int codigo = Integer.parseInt(request.getParameter("codigo"));
+        String op = request.getParameter("op");
         
-        Professor prof = ProfessorRepository.read(codigo);
-        
-        request.setAttribute("professor", prof);
-        
-        getServletContext().getRequestDispatcher("/professor.jsp").forward(request, response);
+        if ("delete".equals(op)) {
+            Professor prof = ProfessorRepository.read(codigo);
+            if (prof != null) {
+                ProfessorRepository.delete(codigo);
+                request.getSession().setAttribute("msgProf", "Professor " + prof.getNome() + " deletado com sucesso!");
+            }
+            response.sendRedirect("professor.jsp");
+        } else {
+            Professor prof = ProfessorRepository.read(codigo);
+            request.setAttribute("professor", prof);
+            getServletContext().getRequestDispatcher("/professor.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -54,30 +62,30 @@ public class ProfessorServletNovo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         int codigo = Integer.parseInt(request.getParameter("codigo")); //recupera as informações do form
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        
-        String atualizar = request.getParameter("atualizar");        
+
+        String atualizar = request.getParameter("atualizar");
         Professor prof = new Professor();
-        
-        prof.setCodigo(codigo); 
+
+        prof.setCodigo(codigo);
         prof.setNome(nome);
         prof.setEmail(email);
         prof.setSenha(senha);
-        
+
         HttpSession session = request.getSession();
-        
+
         if (atualizar != null) {
             ProfessorRepository.update(prof);
-            session.setAttribute("msgProf", "Professor "+prof.getNome()+" foi atualizado com sucesso!");
+            session.setAttribute("msgProf", "Professor " + prof.getNome() + " foi atualizado com sucesso!");
         } else {
             ProfessorRepository.create(prof);
-            session.setAttribute("msgProf", "Professor "+prof.getNome()+" foi cadastrado com sucesso!");
+            session.setAttribute("msgProf", "Professor " + prof.getNome() + " foi cadastrado com sucesso!");
         }
-  
+
         response.sendRedirect("professor.jsp");
     }
 
