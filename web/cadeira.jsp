@@ -5,8 +5,8 @@
 --%>
 
 <%@page import="br.recife.edu.ifpe.model.entities.Cadeira"%>
-<%@page import="br.recife.edu.ifpe.model.repositories.CadeiraRepository"%>
 <%@page import="java.util.List"%>
+<%@taglib prefix="tagCarrega" uri="http://www.ifpe.edu.br/ifpeTags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -40,10 +40,9 @@
             <br/>
             <button onclick="modal2close()">close</button>
         </div>
-            
-        <% 
-            List<Cadeira> cadeiras = CadeiraRepository.readAll();
-        %>
+
+        <tagCarrega:carrega entidade="cadeira" var="cad" escopo="pagina"/>
+        <p>${pageScope.cad.size()}</p>
         
         <table border="1">
             <tr>
@@ -55,6 +54,7 @@
                 <th>operações</th>
             </tr>
             <%
+                List<Cadeira> cadeiras = (List<Cadeira>) pageContext.getAttribute("cad", PageContext.PAGE_SCOPE);
                 for (Cadeira cad : cadeiras) {
             %>
                 <tr>
@@ -73,13 +73,14 @@
                 }
             %>
         </table>
+
+        <tagCarrega:carrega entidade="cadeira" var="cad" escopo="requisicao" codigo="2"/>
+        <p>Nome da cadeira: ${requestScope.cad.nome}</p>
         
         <script>
-            
             var modal = document.getElementById("modal");
-                      
             var modal2 = document.getElementById("modal2");
-            
+
             <%
                 String redirect = request.getParameter("redirect");
                 
